@@ -1,8 +1,8 @@
 --  trigger that decreases the quantity of an item after adding a new order.
 DELIMITER $$
 
-CREATE TRIGGER `holberton`.`orders`
-AFTER INSERT ON `holberton`.`orders`
+CREATE TRIGGER decrease_items
+AFTER INSERT ON orders
 FOR EACH ROW
 BEGIN
     UPDATE items
