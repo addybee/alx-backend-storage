@@ -2,8 +2,9 @@
 
 DELIMITER //
 
-CREATE PROCEDURE AddBonus(IN user_id INT, IN project_name VARCHAR(16), IN score INT)
+CREATE PROCEDURE AddBonus(IN user_id INT, IN project_name VARCHAR(255), IN score INT)
 BEGIN
+
     DECLARE project_id INT;
     
     -- Find the project ID by project name
@@ -14,7 +15,7 @@ BEGIN
     -- Check if the project name exists
     IF project_id IS NULL THEN
         -- If not found, insert a default project
-        INSERT INTO projects (name) VALUES ('new project');
+        INSERT INTO projects (name) VALUES (project_name);
         -- Get the ID of the newly inserted default project
         SET project_id = LAST_INSERT_ID();
     END IF;
