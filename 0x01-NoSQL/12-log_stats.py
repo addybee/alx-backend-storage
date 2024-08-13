@@ -18,11 +18,11 @@ if __name__ == "__main__":
                 "method": {"$in": accepted_method}
             }
         },
-        # Stage 2: Group by the 'methods' field and count the number of documents
+        # Stage 2: Group by the 'methods' field and count number of documents
         {
             "$group": {
                 "_id": "$method",  # Group by the 'methods' field
-                "count": {"$sum": 1}  # Count the number of documents in each group
+                "count": {"$sum": 1}  # Count number of documents in each group
             }
         }
     ]
@@ -30,11 +30,12 @@ if __name__ == "__main__":
     # Execute the aggregation
     result = coll.aggregate(pipeline)
     resut_dict = {item['_id']: item['count'] for item in result}
-    print(coll.count_documents({}), "logs")
+    logs = coll.count_documents({})
+    print("{} logs".format(logs))
     print("Methods:")
     [print("    method {}: {}".format(item, resut_dict.get(item, 0)))
-    for item in accepted_method
-    ]
+     for item in accepted_method
+     ]
     print(coll.count_documents({"$and": [
             {"method": {"$eq": "GET"}}, {"path": "/status"}
         ]}), "status check")
