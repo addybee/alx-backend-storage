@@ -29,13 +29,13 @@ if __name__ == "__main__":
 
     # Execute the aggregation
     result = coll.aggregate(pipeline)
-    resut_dict = {item['_id']: item['count'] for item in result}
+    result_dict = {item['_id']: item['count'] for item in result}
     logs = coll.count_documents({})
     print("{} logs".format(logs))
     print("Methods:")
-    [print("    method {}: {}".format(item, resut_dict.get(item, 0)))
-     for item in accepted_method
-     ]
+    for item in accepted_method:
+        print("\tmethod {}: {}".format(item, result_dict.get(item, 0)))
+    
     print(coll.count_documents({"$and": [
             {"method": {"$eq": "GET"}}, {"path": "/status"}
         ]}), "status check")
