@@ -30,7 +30,7 @@ if __name__ == "__main__":
     # Execute the aggregation
     result = coll.aggregate(pipeline)
     resut_dict = {item['_id']: item['count'] for item in result}
-    print(coll.count_documents({}), "log")
+    print(coll.count_documents({}), "logs")
     print("Methods:")
     [print("    method {}: {}".format(item, resut_dict.get(item, 0)))
     for item in accepted_method
