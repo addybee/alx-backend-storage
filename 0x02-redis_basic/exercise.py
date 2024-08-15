@@ -31,7 +31,12 @@ class Cache:
     def get(self, key: str, fn: Optional[Callable[[Any], Any]]) -> Any:
         """Retrieve data from cache and apply a function if provided."""
         result: Any = self._redis.get(key)
-        return result if fn is None or result is None else fn(result)
+        if fn is int:
+            return int(result)
+        elif fn is str:
+            return str(result)
+        else:
+            return result
         
     def get_str(self, key: str) -> Union[str, None]:
         """Retrieve a string value from cache."""
